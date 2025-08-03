@@ -11,37 +11,24 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 export function createGallery(images) {
-    const murkup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        `<li class="gallery-item">
-          <div class="thumb">
-          <a href="${largeImageURL}">
-          <img class="gallery-img" alt="${tags}" src="${webformatURL}">
-          </a>
-          </div>
-          <ul class="image-stats-list">
-          <li class="image-stats-list-item">
-              <h3>Likes</h3>
-              <p>${likes}</p>
-              </ul>
-          </li>
-          <li class="image-stats-list-item">
-              <h3>Views</h3>
-              <p>${views}</p>
-              </ul>
-          </li>
-          <li class="image-stats-list-item">
-              <h3>Comments</h3>
-              <p>${comments}</p>
-              </ul>
-          </li>
-          <li class="image-stats-list-item">
-              <h3>Downloads</h3>
-              <p>${downloads}</p>
-              </ul>
-          </li>
-        </li>`
-    }).join()
-    gallery.insertAdjacentHTML('beforeend', markup);
+    const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `
+    <li class="gallery-item">
+      <div class="thumb">
+        <a href="${largeImageURL}">
+          <img class="gallery-img" alt="${tags}" src="${webformatURL}" />
+        </a>
+      </div>
+      <ul class="image-stats-list">
+        <li class="image-stats-list-item"><h3>Likes</h3><p>${likes}</p></li>
+        <li class="image-stats-list-item"><h3>Views</h3><p>${views}</p></li>
+        <li class="image-stats-list-item"><h3>Comments</h3><p>${comments}</p></li>
+        <li class="image-stats-list-item"><h3>Downloads</h3><p>${downloads}</p></li>
+      </ul>
+    </li>
+  `).join('');
+
+  gallery.insertAdjacentHTML('beforeend', markup);
+  console.log('Gallery markup added', gallery.innerHTML);
   lightbox.refresh();
 }
 
